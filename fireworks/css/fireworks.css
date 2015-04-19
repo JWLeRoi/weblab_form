@@ -1,0 +1,75 @@
+.sku
+{
+    width: 95px;
+    text-align: right;
+    padding-right: 5px;
+    /*background-color: greenyellow;*/
+}
+
+.description
+{
+    text-align: left;
+    width: 350px;
+    padding-left: 5px;
+    /*height: 100px;*/
+    /*background-color: greenyellow;*/
+}
+
+.on_order
+{
+    text-align: right;
+    width: 44px;
+    padding-right: 5px;
+    /*background-color: greenyellow;*/
+}
+
+.in_stock
+{
+    text-align: right;
+    width: 44px;
+    padding-right: 5px;
+    /*background-color: greenyellow;*/
+}
+
+.cost
+{
+    text-align: right;
+    width: 55px;
+    padding-right: 5px;
+    /*background-color: greenyellow;*/
+}
+
+.price
+{
+    text-align: right;
+    width: 55px;
+    padding-right: 5px;
+    /*background-color: greenyellow;*/
+}
+
+#add_btn
+{
+    width: 89px;
+}
+
+#update_btn
+{
+    width: 89px;
+}
+
+#update_txt
+{
+    width: 35px;
+    text-align: center;
+}
+
+#delete_btn
+{
+    width: 89px;
+}
+
+#delete_txt
+{
+    width: 35px;
+    text-align: center;
+}
