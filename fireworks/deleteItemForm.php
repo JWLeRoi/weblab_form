@@ -1,9 +1,20 @@
 <?php
 include("includes/header.php");
 
-    $sql = "SELECT * FROM Inventory WHERE id = ".$_POST["delete_id_num"];
-    $result = $conn->query($sql);
-    $row=($result->fetch_assoc());
+if ($_POST["delete_id_num"] === "")
+{
+  header("Location: index.php?message=delete_missing_id");
+}
+
+$sql = "SELECT * FROM Inventory WHERE id = ".$_POST["delete_id_num"];
+$result = $conn->query($sql);
+
+if ($result->num_rows === 0)
+{
+    header("Location: index.php?message=delete_no_row");
+}
+
+$row=($result->fetch_assoc());
 ?>
 
 

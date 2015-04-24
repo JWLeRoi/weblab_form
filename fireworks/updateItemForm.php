@@ -1,9 +1,20 @@
 <?php
 include("includes/header.php");
-    
-    $sql = "SELECT * FROM Inventory WHERE id = ".$_POST["update_id_num"];
-    $result = $conn->query($sql);
-    $row=($result->fetch_assoc());
+
+if ($_POST["update_id_num"] === "")
+{
+  header("Location: index.php?message=update_missing_id");
+}
+
+$sql = "SELECT * FROM Inventory WHERE id = ".$_POST["update_id_num"];
+$result = $conn->query($sql);
+
+if ($result->num_rows === 0)
+{
+    header("Location: index.php?message=update_no_row");
+}
+
+$row=($result->fetch_assoc());
 ?>
     
     
@@ -19,7 +30,7 @@ include("includes/header.php");
         <label>Unit purchase cost  <input class="cost"        type="text" name="cost"        value="<?php print $row["cost"]?>"        /></label>
         <label>Unit sales price    <input class="price"       type="text" name="price"       value="<?php print $row["price"]?>"       /></label>
 
-        <input type = "submit" value="Save"   />
+        <input type = "submit" value="Update"   />
       </form>
 
       <form method="post" action="index.php">

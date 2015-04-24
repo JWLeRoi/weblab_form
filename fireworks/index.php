@@ -27,11 +27,39 @@ include("includes/header.php");
           echo "</script>";
         }
 
+        if (strpos($message, "update_missing_id")!== FALSE)
+        {
+          echo "<script type= 'text/javascript'>";
+          echo "alert('Update failed! \\nNo item number entered!')";
+          echo "</script>";
+        }
+
+        if (strpos($message, "update_no_row")!== FALSE)
+        {
+          echo "<script type= 'text/javascript'>";
+          echo "alert('Update failed! \\nItem not found!')";
+          echo "</script>";
+        }
+
         if (strpos($message, "delete_success")!== FALSE)
         {
           $message = "Deleted item #" . substr($message, strpos($message, "=") + 1 );
           echo "<script type= 'text/javascript'>";
           echo "alert('$message')";
+          echo "</script>";
+        }
+
+        if (strpos($message, "delete_missing_id")!== FALSE)
+        {
+          echo "<script type= 'text/javascript'>";
+          echo 'alert("Delete failed! \nNo item number entered!")';
+          echo "</script>";
+        }
+
+        if (strpos($message, "delete_no_row")!== FALSE)
+        {
+          echo "<script type= 'text/javascript'>";
+          echo "alert('Delete failed! \\nItem not found!')";
           echo "</script>";
 
         }
