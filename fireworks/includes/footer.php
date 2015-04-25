@@ -1,5 +1,5 @@
     <?php
-    db_close($conn);
+    db_closep($dbh);
     ?>
 
   </body>

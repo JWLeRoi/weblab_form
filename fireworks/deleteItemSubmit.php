@@ -1,15 +1,26 @@
 <?php
 include("includes/functions.php");
 
-$conn = db_connect();
+$dbh = db_connectp();
 
 
 
-$sql = "DELETE FROM Inventory WHERE id = '" . $_POST["id"] . "'";
+$stmt = $dbh->prepare("DELETE FROM Inventory WHERE id = ?");
+
+
+$stmt->bindParam(1, $_POST["id"]);
 
 
 
-$conn->query($sql) or die("there was an error!");
+
+
+
+
+
+
+$stmt->execute() or die("there was an error!");
+
+db_closep($dbh);
 
 header("Location: index.php?message=delete_success id=" . $_POST["id"]);
 ?>

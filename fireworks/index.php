@@ -81,10 +81,10 @@ include("includes/header.php");
         </thead>
 
         <?php
-        $sql = "SELECT * FROM `Inventory` ;";
-        $result = $conn->query($sql);
+        $stmt = $dbh->prepare("SELECT * FROM Inventory");
+        $stmt->execute();
 
-        while($row = $result->fetch_assoc())
+        while($row = $stmt->fetch())
         {
         ?>
           <tr>
@@ -122,4 +122,6 @@ include("includes/header.php");
 
     </div>
 
-    <?php include("includes/footer.php"); ?>
+<?php
+include("includes/footer.php");
+?>

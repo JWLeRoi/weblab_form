@@ -14,7 +14,7 @@
   <body>
     <?php
     include("includes/functions.php");
-    $conn = db_connect();
+    $dbh = db_connectp();
     ?>
 
     <div id="header">

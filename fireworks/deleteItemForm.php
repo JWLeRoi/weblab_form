@@ -1,22 +1,23 @@
 <?php
 include("includes/header.php");
 
-if ($_POST["delete_id_num"] === "")
+$idNum = $_POST["delete_id_num"];
+
+if ($idNum === "")
 {
   header("Location: index.php?message=delete_missing_id");
 }
 
-$sql = "SELECT * FROM Inventory WHERE id = ".$_POST["delete_id_num"];
-$result = $conn->query($sql);
+$stmt = $dbh->prepare("SELECT * FROM Inventory WHERE id = ?");
+$stmt->bindParam(1, $idNum);
+$stmt->execute() or die("there was an error!");
+$row = $stmt->fetch();
 
-if ($result->num_rows === 0)
+if (is_null($row))
 {
     header("Location: index.php?message=delete_no_row");
 }
-
-$row=($result->fetch_assoc());
 ?>
-
 
     <div><h2>Delete Item</h2></div>
 
@@ -30,7 +31,7 @@ $row=($result->fetch_assoc());
         <label>Unit purchase cost  <input class="cost"        type="text" name="cost"        value="<?php print $row["cost"]?>"        /></label>
         <label>Unit sales price    <input class="price"       type="text" name="price"       value="<?php print $row["price"]?>"       /></label>
 
-        <input type = "submit" value="Delete" />
+        <input type = "submit" value="Delete"/>
       </form>
 
       <form method="post" action="index.php">

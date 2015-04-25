@@ -1,23 +1,24 @@
 <?php
 include("includes/header.php");
 
-if ($_POST["update_id_num"] === "")
+$idNum = $_POST["update_id_num"];
+
+if ($idNum === "")
 {
   header("Location: index.php?message=update_missing_id");
 }
 
-$sql = "SELECT * FROM Inventory WHERE id = ".$_POST["update_id_num"];
-$result = $conn->query($sql);
+$stmt = $dbh->prepare("SELECT * FROM Inventory WHERE id = ?");
+$stmt->bindParam(1, $idNum);
+$stmt->execute() or die("there was an error!");
+$row = $stmt->fetch();
 
-if ($result->num_rows === 0)
+if (is_null($row))
 {
     header("Location: index.php?message=update_no_row");
 }
-
-$row=($result->fetch_assoc());
 ?>
-    
-    
+
     <div><h2>Update Item</h2></div>
 
     <div>
@@ -30,7 +31,7 @@ $row=($result->fetch_assoc());
         <label>Unit purchase cost  <input class="cost"        type="text" name="cost"        value="<?php print $row["cost"]?>"        /></label>
         <label>Unit sales price    <input class="price"       type="text" name="price"       value="<?php print $row["price"]?>"       /></label>
 
-        <input type = "submit" value="Update"   />
+        <input type = "submit" value="Update"/>
       </form>
 
       <form method="post" action="index.php">

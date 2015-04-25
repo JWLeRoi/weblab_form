@@ -18,6 +18,7 @@ include("includes/header.php");
 
 
 
+
     <div><h2>Add Item</h2></div>
 
     <div>
@@ -30,11 +31,11 @@ include("includes/header.php");
         <label>Unit purchase cost  <input class="cost"        type="number" min="0" step=".01" name="cost"      placeholder="xxx.xx"   /></label>
         <label>Unit sales price    <input class="price"       type="number" min="0" step=".01" name="price"     placeholder="xxx.xx"   /></label>
 
-        <input type = "submit" value="Add"    />
+        <input type = "submit" value="Add"   />
       </form>
 
       <form method="post" action="index.php">
-        <input type = "submit" value="Cancel" />
+        <input type = "submit" value="Cancel"/>
 
       </form>
 

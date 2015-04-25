@@ -1,31 +1,34 @@
 <?php
 function total($number, $value)
 {
-    return $number * $value;
+  return $number * $value;
 }
 
-function db_connect()
+function db_connectp()
 {
-    $servername = "localhost";
-    $username = "jwl01";
-    $password = "weblabjwl01";
-    $db = "jwl01";
+  $servername = "localhost";
+  $username = "jwl01";
+  $password = "weblabjwl01";
+  $db = "jwl01";
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password,  $db);
+  try
+  {
+      $dbh = new PDO('mysql:host=localhost;dbname=jwl01', $username, $password);
+  }
+  catch (PDOException $e)
+  {
+      print "Error!: " . $e->getMessage() . "<br/>";
+      die();
 
-    // Check connection
-    if ($conn->connect_error)
-    {
-        die("Connection failed: " . $conn->connect_error);
-    }
+  }
 
-    return $conn;
+  return $dbh;
 
 }
 
-function db_close($conn)
+function db_closep($dbh)
 {
-    mysqli_close($conn);
+  $dbh->query('SELECT pg_terminate_backend(pg_backend_pid());');
+  $dbh = null;
 }
 ?>
