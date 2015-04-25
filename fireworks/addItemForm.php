@@ -14,11 +14,6 @@ include("includes/header.php");
 
 
 
-
-
-
-
-
     <div><h2>Add Item</h2></div>
 
     <div>

@@ -57,9 +57,9 @@
     width: 89px;
 }
 
-#update_txt
+#update_text
 {
-    width: 35px;
+    width: 45px;
     text-align: center;
 }
 
@@ -68,8 +68,8 @@
     width: 89px;
 }
 
-#delete_txt
+#delete_text
 {
-    width: 35px;
+    width: 45px;
     text-align: center;
 }

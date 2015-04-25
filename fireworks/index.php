@@ -27,13 +27,6 @@ include("includes/header.php");
           echo "</script>";
         }
 
-        if (strpos($message, "update_missing_id")!== FALSE)
-        {
-          echo "<script type= 'text/javascript'>";
-          echo "alert('Update failed! \\nNo item number entered!')";
-          echo "</script>";
-        }
-
         if (strpos($message, "update_no_row")!== FALSE)
         {
           echo "<script type= 'text/javascript'>";
@@ -46,13 +39,6 @@ include("includes/header.php");
           $message = "Deleted item #" . substr($message, strpos($message, "=") + 1 );
           echo "<script type= 'text/javascript'>";
           echo "alert('$message')";
-          echo "</script>";
-        }
-
-        if (strpos($message, "delete_missing_id")!== FALSE)
-        {
-          echo "<script type= 'text/javascript'>";
-          echo 'alert("Delete failed! \nNo item number entered!")';
           echo "</script>";
         }
 
@@ -111,12 +97,12 @@ include("includes/header.php");
 
       <form action="updateItemForm.php" method="post">
         <input type="submit" id="update_btn" name="update" value="Update Item"/>
-        <label><input type="text"   id="update_txt" name="update_id_num"/> <--Enter item number to update.</label>
+        <label><input type="text" id="update_text" name="update_id_num" pattern="[0-9]{0,}[1-9]{1}" required/> <--Enter item number to update.</label>
       </form>
 
       <form action="deleteItemForm.php" method="post">
         <input type="submit" id="delete_btn" name="delete" value="Delete Item"/>
-        <label><input type="text"   id="delete_txt" name="delete_id_num"/> <--Enter item number to delete.</label>
+        <label><input type="text" id="delete_text" name="delete_id_num" pattern="[0-9]{0,}[1-9]{1}" required/> <--Enter item number to delete.</label>
 
       </form>
 

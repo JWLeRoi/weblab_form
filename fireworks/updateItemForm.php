@@ -3,17 +3,12 @@ include("includes/header.php");
 
 $idNum = $_POST["update_id_num"];
 
-if ($idNum === "")
-{
-  header("Location: index.php?message=update_missing_id");
-}
-
 $stmt = $dbh->prepare("SELECT * FROM Inventory WHERE id = ?");
 $stmt->bindParam(1, $idNum);
 $stmt->execute() or die("there was an error!");
 $row = $stmt->fetch();
 
-if (is_null($row))
+if ($row["id"] === null)
 {
     header("Location: index.php?message=update_no_row");
 }
