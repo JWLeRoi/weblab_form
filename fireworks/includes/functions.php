@@ -31,4 +31,12 @@ function db_closep($dbh)
   $dbh->query('SELECT pg_terminate_backend(pg_backend_pid());');
   $dbh = null;
 }
+
+function sendEMail($message)
+{
+  $to = "jwleroi@yahoo.com";
+  $subject = "Fireworks Database Changed";
+
+  mail($to, $subject, $message);
+}
 ?>
