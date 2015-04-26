@@ -22,7 +22,7 @@ $stmt->execute() or die("there was an error!");
 
 db_closep($dbh);
 
-sendEMail("One item was updated");
+sendEMail("One item was updated\r\n");
 
 header("Location: index.php?message=update_success id=" . $_POST["id"]);
 ?>

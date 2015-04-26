@@ -22,7 +22,7 @@ $stmt->execute() or die("there was an error!");
 
 db_closep($dbh);
 
-sendEMail("One item was added");
+sendEMail("One item was added\r\n");
 
 header("Location: index.php?message=add_success");
 ?>

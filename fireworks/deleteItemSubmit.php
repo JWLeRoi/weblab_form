@@ -22,7 +22,7 @@ $stmt->execute() or die("there was an error!");
 
 db_closep($dbh);
 
-sendEMail("One item was deleted");
+sendEMail("One item was deleted\r\n");
 
 header("Location: index.php?message=delete_success id=" . $_POST["id"]);
 ?>
