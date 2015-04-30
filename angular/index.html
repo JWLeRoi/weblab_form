@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html lang="en" ng-app="userApp">
+<head>
+  <meta charset="utf-8">
+
+  <title></title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src="js/controller.js"></script>
+</head>
+
+<body ng-controller="UserAppCtrl">
+  <input ng-model="query">
+  <h1 id="something">fkljdklf</h1>
+  <table>
+    <tr ng-repeat="user in users | filter:query">
+      <td>{{user.name}}</td>
+      <td>{{user.address}}</td>
+      <td>{{user.phone}}</td>
+    </tr>
+  </table>
+
+
+
+</body>
+</html>

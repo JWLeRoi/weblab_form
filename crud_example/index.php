@@ -26,11 +26,19 @@
 
   $sql = "SELECT * FROM `users` ;";
 
-  $result = $conn->query($sql);
+  $result = $conn->query($sql)  or die(mysqli_error());
+
+  $i = 0;
+
 
   while($row = $result->fetch_assoc()) {
+    $i++;
+    if($i> 1) {
+      $i=0;
+    }
+
     ?>
-      <tr>
+      <tr <?php if($i == 1) { print "class='even'"; }?>>
         <td><?php print $row['id']?></td>
         <td><?php print $row['name']?></td>
         <td><?php print $row['address']?></td>
@@ -68,3 +76,8 @@
 
 
 <?php include('includes/footer.php'); ?>
+
+
+<style>
+  .even { background: #ccccff; }
+</style>

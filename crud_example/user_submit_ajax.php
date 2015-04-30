@@ -1,10 +1,13 @@
 <?php
 
+error_reporting(0);
+ini_set("display_errors", 0);
+$error = 0;
+$errormessage = "";
 
 include('includes/db.php');
 $conn = db_connect();
 
-print_r($_POST);
 
 $phone = $_POST['phone'];
 
@@ -30,9 +33,15 @@ else {
 }
 
 
-print $sql . "<br/>";
 
-$conn->query($sql) or die(mysqli_error());
+$conn->query($sql);
 
 
-header("Location: index.php?message=add_success");
+
+if(error==1) {
+  print JSON_encode($error);
+}
+else{
+  print 1;
+
+}

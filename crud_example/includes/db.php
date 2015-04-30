@@ -4,9 +4,9 @@
 function db_connect(){
 
 $servername = "localhost";
-$username = "prakash";
-$password = "prakash";
-$db = "prakash";
+$username = "root";
+$password = "weblab2015";
+$db = "daviddb2";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password,  $db);

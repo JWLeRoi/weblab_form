@@ -1,0 +1,36 @@
+<p><a href="#" onClick="update_data()">Home</a></p>
+
+
+
+<div>
+  <label>Name</label>
+  <span><%= userInfo.name %></span>
+</div>
+<div>
+
+  <label>Address</label>
+  <span><%= userInfo.address %></span>
+</div>
+<div>
+  <label>Phone</label>
+  <span><%= userInfo.phone %></span>
+</div>
+<div>
+  <label>Map</label>
+  <span>
+
+  </span>
+</div>
+
+
+<div id="map-canvas"></div>
+
+<style>
+     html, body, #map-canvas {
+       height: 100%;
+       width: 400px;
+       height: 400px;
+       margin: 0px;
+       padding: 0px
+     }
+   </style>
