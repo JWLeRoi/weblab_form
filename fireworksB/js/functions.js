@@ -63,95 +63,155 @@ var items = {};
 //
 //}
 
+function displayAddItemButton()
+{
+  var html = new EJS({url: 'views/addItemButton.ejs'}).render("");
+  $('#container02').html(html);
+  $("#button01").on("click", function(event)
+  {
+    displayAddItemForm();
 
+  });
 
+}
 
-function update_data()
+function displayUpdateItemForm(itemID)
+{
+  var html = new EJS({url: 'views/updateItemForm.ejs'}).render("");
+  $('#container02').html(html);
+  alert(itemID);
+
+  $.ajax(
+  {
+    type: "POST",
+    url: "getItem.php",
+    data: itemID,
+    success: function (ajaxReturn)
+    {
+      alert(ajaxReturn);
+    }
+  }).done(function (ajaxReturn)
+  {
+  });
+
+  $("#updateItemInfo").on("submit", function (event)
+  {
+    event.preventDefault();
+    event.stopPropagation();
+    $.ajax(
+    {
+      type: "POST",
+      url: "updateItem.php",
+      data: $("#updateItemInfo").serialize(),
+      success: function(ajaxReturn)
+      {
+      }
+    }).done(function(ajaxReturn)
+    {
+    });
+
+    $("#updateItemInfo").trigger("reset");
+
+    displayItems();
+
+  });
+
+  $("#button03").on("click", function (event)
+  {
+    displayAddItemButton();
+
+  });
+
+}
+
+function displayAddItemForm()
+{
+  var html = new EJS({url: 'views/addItemForm.ejs'}).render("");
+  $('#container02').html(html);
+
+  $("#addItemInfo").on("submit", function (event)
+  {
+    event.preventDefault();
+    event.stopPropagation();
+    $.ajax(
+    {
+      type: "POST",
+      url: "addItem.php",
+      data: $("#addItemInfo").serialize(),
+      success: function(ajaxReturn)
+      {
+      }
+    }).done(function(ajaxReturn)
+    {
+    });
+    $("#addItemInfo").trigger("reset");
+
+    displayItems();
+
+  });
+
+  $("#button03").on("click", function (event)
+  {
+    displayAddItemButton();
+
+  });
+
+}
+
+function removeForm()
+{
+
+}
+
+function displayItems()
 {
   var request = $.ajax
   ({
-    url: "index_json.php",
+    url: "displayItems.php",
     context: document.body
   });
 
   request.done(function(ajaxReturn)
   {
-  	//console.log(ajaxReturn);
-
     items = JSON.parse(ajaxReturn);
-
-    //console.log(items);
-
-    //items.forEach(function(item, index, items)
-    //{
-    //  items[index].id="";
-    //  items[index].sku="";
-    //  items[index].description="";
-    //  items[index].onorder="";
-    //  items[index].instock="";
-    //  items[index].cost="";
-    //  items[index].totalcost="";
-    //  items[index].price="";
-    //  items[index].totalprice="";
-    //
-    //});
-
-    //console.log(items);
-
-    //items.forEach(function(e,i){
-
-      //if(isEven(i))
-      //{
-      //  items[i].evenClass = "even";
-      //}
-      //else {
-
-        //items[i].evenClass = "";
-      //}
-    //});
-
-    //console.log(items);
-
-    //var html ="<div><table><tr><td>"+items[0].name+"</td></tr></table></div>"
-
-    //var ejsObject = new EJS({url: 'views/index_ajax.ejs'});
-    //console.log(ejsObject);
-    var html = new EJS({url: 'views/index_ajax.ejs'}).render(ajaxReturn);
-    //console.log(html);
-  	$('#container').html(html);
-
-    //$('.view_user_button').click(function(e)
-    //{
-    //    view_user($(this).attr('userId'));
-    //});
-
-
-   //console.log('updated data!');
+    var html = new EJS({url: 'views/index.ejs'}).render(ajaxReturn);
+  	$('#container01').html(html);
   });
 
+  setTimeout(function()
+  {
+    $('.editItem').click(function(e)
+    {
+      alert("Edit " + $(this).attr('ITEMID'));
+      displayUpdateItemForm($(this).attr('itemID'));
+
+    });
+
+    $('.deleteItem').click(function(e)
+    {
+      //alert("Delete " + $(this).attr('itemId'));
+      view_user($(this).attr('userId'));
+    });
+
+    $('.findStore').click(function(e) {
+      //alert("Find " + $(this).attr("itemId"));
+      view_user($(this).attr("userId"));
+    });
+
+  }, 500);
 
 }
 
-
-update_data();
-
 //setInterval(function(){ update_data(); }, 2000);
 
-//
-//$(document).ready(function(){
-//  $('#form_submit').click(function(e){
-//    var user = {
-//      name : $("#username").val(),
-//      address : $("#address").val(),
-//      phone : $("#phone").val()
-//    }
-//
-//    post_data(user);
-//
-//    console.log('form clicked');
-//
-//  });
-//});
+$(document).ready(function()
+{
+  displayItems();
+  displayAddItemButton();
+
+});
+
+
 //
 //
 //function isEven(n)
@@ -190,3 +250,6 @@ update_data();
 //      title: 'Here!'
 //  });
 //}
+
+//displayItems();
+//displayAddItemButton();

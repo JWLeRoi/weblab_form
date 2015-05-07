@@ -1,7 +1,5 @@
 <?php
-include('includes/mysqliConn.php');
-
-$conn = mysqliConnect();
+include('includes/functions.php');
 
   if (isset($_GET['message']))
   {
@@ -18,17 +16,23 @@ $conn = mysqliConnect();
 
   }
 
+  $dbh = pdoOpen();
+
   $sql = "SELECT * FROM Inventory";
 
-  $result = $conn->query($sql)  or die(mysqli_error());
+  $result = $dbh->prepare($dbh);
 
-  $user_array = [];
+  $result->execute() or die("PDO Error");
 
-  while($row = $result->fetch_assoc())
+  pdoClose($dbh);
+
+  $itemArray = [];
+
+  while($row = $result->fetch())
   {
-	$user_array[] = $row;
+	$itemArray[] = $row;
   }
 
-  print json_encode($user_array);
+  print json_encode($itemArray);
 
 

@@ -33,9 +33,9 @@
 		  <td><%= el.price%></td>
 		  <td><%= el.totalprice%></td>
 
-		  <td><a href="#" id="edit"                        >Edit</a></td>
-		  <td><a href="#" id="delete"                      >Delete</a></td>
-		  <td><a href="#" id="find" findStore="<%= el.id%>">Find Store</a></td>
+		  <td><a href="#" class="editItem"   itemID="<%= el.id%>" >Edit</a></td>
+		  <td><a href="#" class="deleteItem" itemID="<%= el.id%>" >Delete</a></td>
+		  <td><a href="#" class="findStore"  itemID="<%= el.id%>" >Find Store</a></td>
 
 	    </tr>
 
