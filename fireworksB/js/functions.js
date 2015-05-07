@@ -65,8 +65,8 @@ var items = {};
 
 function displayAddItemButton()
 {
-  var html = new EJS({url: 'views/addItemButton.ejs'}).render("");
-  $('#container02').html(html);
+  var html = new EJS({url: "views/addItemButton.ejs"}).render("");
+  $("#container02").html(html);
   $("#button01").on("click", function(event)
   {
     displayAddItemForm();
@@ -77,21 +77,25 @@ function displayAddItemButton()
 
 function displayUpdateItemForm(itemID)
 {
-  var html = new EJS({url: 'views/updateItemForm.ejs'}).render("");
-  $('#container02').html(html);
-  alert(itemID);
+  var html = new EJS({url: "views/updateItemForm.ejs"}).render("");
+  $("#container02").html(html);
 
   $.ajax(
   {
     type: "POST",
     url: "getItem.php",
-    data: itemID,
-    success: function (ajaxReturn)
-    {
-      alert(ajaxReturn);
-    }
+    data: "itemID=" + itemID
   }).done(function (ajaxReturn)
   {
+    items = JSON.parse(ajaxReturn);
+    //alert(items.sku);
+    $("#id").val(items.id);
+    $("#sku").val(items.sku);
+    $("#description").val(items.description);
+    $("#on_order").val(items.onorder);
+    $("#in_stock").val(items.instock);
+    $("#cost").val(items.cost);
+    $("#price").val(items.price);
   });
 
   $("#updateItemInfo").on("submit", function (event)
@@ -102,10 +106,7 @@ function displayUpdateItemForm(itemID)
     {
       type: "POST",
       url: "updateItem.php",
-      data: $("#updateItemInfo").serialize(),
-      success: function(ajaxReturn)
-      {
-      }
+      data: $("#updateItemInfo").serialize()
     }).done(function(ajaxReturn)
     {
     });
@@ -126,8 +127,8 @@ function displayUpdateItemForm(itemID)
 
 function displayAddItemForm()
 {
-  var html = new EJS({url: 'views/addItemForm.ejs'}).render("");
-  $('#container02').html(html);
+  var html = new EJS({url: "views/addItemForm.ejs"}).render("");
+  $("#container02").html(html);
 
   $("#addItemInfo").on("submit", function (event)
   {
@@ -137,13 +138,11 @@ function displayAddItemForm()
     {
       type: "POST",
       url: "addItem.php",
-      data: $("#addItemInfo").serialize(),
-      success: function(ajaxReturn)
-      {
-      }
+      data: $("#addItemInfo").serialize()
     }).done(function(ajaxReturn)
     {
     });
+
     $("#addItemInfo").trigger("reset");
 
     displayItems();
@@ -174,26 +173,26 @@ function displayItems()
   request.done(function(ajaxReturn)
   {
     items = JSON.parse(ajaxReturn);
-    var html = new EJS({url: 'views/index.ejs'}).render(ajaxReturn);
-  	$('#container01').html(html);
+    var html = new EJS({url: "views/index.ejs"}).render(ajaxReturn);
+  	$("#container01").html(html);
   });
 
   setTimeout(function()
   {
-    $('.editItem').click(function(e)
+    $(".editItem").click(function(e)
     {
-      alert("Edit " + $(this).attr('ITEMID'));
-      displayUpdateItemForm($(this).attr('itemID'));
+      //alert("Edit " + $(this).attr("itemID"));
+      displayUpdateItemForm($(this).attr("itemID"));
 
     });
 
-    $('.deleteItem').click(function(e)
+    $(".deleteItem").click(function(e)
     {
       //alert("Delete " + $(this).attr('itemId'));
-      view_user($(this).attr('userId'));
+      view_user($(this).attr("userId"));
     });
 
-    $('.findStore').click(function(e) {
+    $(".findStore").click(function(e) {
       //alert("Find " + $(this).attr("itemId"));
       view_user($(this).attr("userId"));
     });
