@@ -1,34 +1,45 @@
 <?php
-include('includes/functions.php');
+  include('includes/functions.php');
 
-$conn = mysqliConnect();
+//$conn = mysqliConnect();
 
-  if (isset($_GET['message']))
-  {
-    if ($_GET['message'] == "add_success")
-    {
-      print "<h1>Your user was added successfully</h1>";
-    }
+//  if (isset($_GET['message']))
+//  {
+//    if ($_GET['message'] == "add_success")
+//    {
+//      print "<h1>Your user was added successfully</h1>";
+//    }
+//
+//    if($_GET['message']== 'delete_success')
+//    {
+//      print "<h1>User number ".$_GET['id']. " has been deleted</h1>";
+//
+//    }
+//
+//  }
 
-    if($_GET['message']== 'delete_success')
-    {
-      print "<h1>User number ".$_GET['id']. " has been deleted</h1>";
+  $error = "No Error";
+//$errormessage = "";
 
-    }
+  $dbh = pdoOpen();
 
-  }
+  $stmt = $dbh->prepare("DELETE FROM Inventory WHERE id = ?");
+  $stmt->bindParam(1, $_POST["id"]);
 
-  $sql = "SELECT * FROM Inventory";
+  $stmt->execute() or die($error = "PDO Error");
 
-  $result = $conn->query($sql)  or die(mysqli_error());
+  pdoClose($dbh);
 
-  $user_array = [];
+//sendEMail("One item was updated\r\n");
 
-  while($row = $result->fetch_assoc())
-  {
-	$user_array[] = $row;
-  }
+//if($error === 1)
+//{
+  print json_encode($stmt);
+  print json_encode($error);
 
-  print json_encode($user_array);
+
+
+
+print json_encode($user_array);
 
 
