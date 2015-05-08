@@ -18,10 +18,10 @@
 
 include("includes/functions.php");
 
-error_reporting(0);
-ini_set("display_errors", 0);
-$error = 0;
-$errormessage = "";
+//error_reporting(0);
+//ini_set("display_errors", 0);
+$error = "No Error";
+//$errormessage = "";
 
 $dbh = pdoOpen();
 
@@ -39,17 +39,20 @@ $stmt->bindParam(6, $totalCost);
 $stmt->bindParam(7, $_POST["price"]);
 $stmt->bindParam(8, $totalPrice);
 
-$stmt->execute() or die("there was an error!");
+$stmt->execute() or die("PDO Error");
 
 pdoClose($dbh);
 
 //sendEMail("One item was added\r\n");
 
-if($error === 1)
-{
-  print JSON_encode($error);
-}
-else
-{
-  print 1;
-}
+print json_encode($stmt);
+print json_encode($error);
+
+//if($error === 1)
+//{
+//  print JSON_encode($error);
+//}
+//else
+//{
+//  print 1;
+//}
